@@ -1,0 +1,20 @@
+{
+  "help": {
+    "text": "COMMANDS: HELP, STATUS, ABOUT, CLEAR",
+    "color": "amber"
+  },
+  "status": {
+    "text": "SYSTEM NOMINAL. GRAVITY ONLINE.",
+    "color": "main"
+  },
+  "about": {
+    "text": [
+      "NBJAT v0.01b - NO BUILDERS JUST A TOOL",
+      "BUILT FOR LOW-RES CRT TERMINAL OPS."
+    ],
+    "color": "info"
+  },
+  "clear": {
+    "action": "clear"
+  }
+}

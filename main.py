@@ -1,21 +1,22 @@
-import time
 from nicegui import ui
+from resources import commands
 from resources import rendering as term
 
 term.init_terminal(width=256, height=256, scanlines=True, glow=True)
+term.bind_keyboard(commands.handle_key)
+
 
 def update_frame():
-    # Print text by terminal row (0, 1, 2...) just like a real console
-    term.print_line("NBJAT v0.01a [READY]", row=0, color=term.TERMINAL_INFO) # NBJAT stands for No Builders Just A Tool
-    term.print_line("------------------------", row=1, color=term.TERMINAL_INFO)
-    term.print_line("> INIT GRAVITY PIXEL...", row=3, color=term.TERMINAL_MAIN)
-    term.print_line("> STATUS: ONLINE", row=4, color=term.TERMINAL_MAIN)
+    term.print_timed("Loading...", row=0, delay=0.0, type_speed=0.05, color=term.TERMINAL_INFO)
+    term.print_timed("NBJAT v0.01b [READY]", row=term.last_row, delay=1.0, type_speed=0.04, color=term.TERMINAL_INFO)
+    term.print_timed("------------------------", row=term.last_row + 1, delay=0.2, type_speed=0.01, color=term.TERMINAL_INFO)
+    term.print_timed("> INIT NBJAT...", row=term.last_row + 2, delay=0.4, type_speed=0.04)
+    done = term.print_timed("> STATUS: ONLINE", row=term.last_row + 1, delay=0.5, type_speed=0.04)
 
-    # Blinking block cursor every 0.5 seconds
-    if int(time.time() * 2) % 2 == 0:
-        term.draw_cursor(row=6, col=0)
+    # Once boot finishes, hand control over to your commands.py prompt
+    if done:
+        commands.draw_prompt(start_row=term.last_row + 2)
 
-    # Push frame to screen
     term.render()
 
 
